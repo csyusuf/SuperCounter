@@ -21,21 +21,23 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Text
 
 @Composable
-fun MainScreen(navigateToCounter: () -> Unit, navigateToSettings: () -> Unit) {
+fun MainScreen(navigateToCounterSelection: () -> Unit, navigateToSettings: () -> Unit) {
     var showMenu by remember { mutableStateOf(true) }
-    val backgroundColor = Color.Black  // Your main content
-    Column (
+    val backgroundColor = Color.Black
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(20.dp)
             .wrapContentSize(Alignment.Center),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally) {
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
         DropdownMenu(
             expanded = showMenu,
             onDismissRequest = { showMenu = false },
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .background(backgroundColor)
                 .wrapContentSize(Alignment.Center)
         ) {
@@ -48,9 +50,9 @@ fun MainScreen(navigateToCounter: () -> Unit, navigateToSettings: () -> Unit) {
                 modifier = Modifier.fillMaxWidth()
             )
             DropdownMenuItem(
-                text = { Text("Counter", modifier = Modifier.fillMaxWidth()) },
+                text = { Text("Choose Counter", modifier = Modifier.fillMaxWidth()) },
                 onClick = {
-                    navigateToCounter()
+                    navigateToCounterSelection()
                     showMenu = false
                 },
                 modifier = Modifier.fillMaxWidth()

@@ -11,10 +11,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.*
-import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.getreferralbonus.supercounter.presentation.theme.SuperCounterTheme
 import androidx.compose.runtime.remember
+import androidx.wear.tooling.preview.devices.WearDevices
+
 
 class MainActivity : ComponentActivity() {
 
@@ -28,8 +29,11 @@ class MainActivity : ComponentActivity() {
 
                 when (currentScreen) {
                     AppScreen.MainMenu -> MainScreen(
-                        navigateToCounter = { currentScreen = AppScreen.Counter },
-                        navigateToSettings = { currentScreen = AppScreen.Settings }
+                        navigateToSettings = { currentScreen = AppScreen.Settings },
+                        navigateToCounterSelection = { currentScreen = AppScreen.CounterSelection }
+                    )
+                    AppScreen.CounterSelection -> CounterSelectionScreen(
+                        navigateToCounter = { currentScreen = AppScreen.Counter }
                     )
                     AppScreen.Counter -> CounterApp()
                     AppScreen.Settings -> SettingsScreen(
@@ -54,7 +58,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
+@Preview(device = WearDevices.SMALL_ROUND, showSystemUi = true)
 @Composable
 fun CounterAppPreview() {
     CounterApp()
